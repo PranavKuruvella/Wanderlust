@@ -3,20 +3,8 @@ const router = express.Router({mergeParams: true}) //app.js nunchi unna motham u
 const Listing = require("../models/listing") //listing model
 const wrapAsync = require("../utils/wrapAsync") //error handling ki
 const ExpressError = require("../utils/expressError") //error class ki
-const { reviewSchemaJoi } = require("../schema") //server side validation 
 const Review = require("../models/review") //review schema
-
-
-//this is to throw error if there is a problem with joi in review
-const validateReview = (req, res, next) => {
-    let { error } = reviewSchemaJoi.validate(req.body) //server side validate chesthunam using joi complete body ni aaa file lo listing undha ani check chesthunam!
-    if (error) {
-        let errMsg = error.details.map((el) => el.message).join(",")
-        throw new ExpressError(400, errMsg)
-    } else {
-        next()
-    }
-}
+const { validateReview } = require("../middleware")
 
 
 //review Post route

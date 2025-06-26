@@ -4,19 +4,9 @@ const Listing = require("../models/listing") //listing model
 const wrapAsync = require("../utils/wrapAsync") //error handling ki
 const { listingSchemaJoi } = require("../schema") //server side validation
 const ExpressError = require("../utils/expressError") //error class ki
-const {isLoggedIn} = require("../middleware") //to find if user is logged in or not
-
-
-//this is to throw error if there is a problem with joi in listing
-const validateListing = (req, res, next) => {
-    let { error } = listingSchemaJoi.validate(req.body) //server side validate chesthunam using joi complete body ni aaa file lo listing undha ani check chesthunam!
-    if (error) {
-        let errMsg = error.details.map((el) => el.message).join(",")
-        throw new ExpressError(400, errMsg)
-    } else {
-        next()
-    }
-}
+const {isLoggedIn,validateListing,isOwner} = require("../middleware") //to find if user is logged in or not
+ //owner aithene permission evvu
+ //owner aithene permission evvu
 
 
 //home route
@@ -54,7 +44,7 @@ router.post("/", validateListing, wrapAsync(async (req, res, next) => {
 }))
 
 //edit route
-router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
+router.get("/:id/edit",isLoggedIn,isOwner, wrapAsync(async (req, res) => {
     let { id } = req.params
     let listing = await Listing.findById(id)
     if (!listing){ //lets say listing ni delete chesi malla adhe link ki osthe lisiting ledhu ani chepi all listing ki redirect chesthunam
@@ -65,7 +55,11 @@ router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
 }))
 
 //update route
-router.put("/:id",isLoggedIn, validateListing, wrapAsync(async (req, res) => {
+router.put("/:id",
+    isLoggedIn,
+    isOwner, //owner aihtene delete chese permission isthunam
+    validateListing,
+      wrapAsync(async (req, res) => {
     let { id } = req.params
     await Listing.findByIdAndUpdate(id, { ...req.body.listing })
     req.flash("success", "Listing Updated!")
@@ -73,10 +67,10 @@ router.put("/:id",isLoggedIn, validateListing, wrapAsync(async (req, res) => {
 }))
 
 //delete route
-router.delete("/:id",isLoggedIn, wrapAsync(async (req, res) => {
+router.delete("/:id",isLoggedIn,isOwner, wrapAsync(async (req, res) => {
     let { id } = req.params
     await Listing.findByIdAndDelete(id)
-    req.flash("success", " Listing Deleted!")
+    req.flash("success", "Listing Deleted!")
     res.redirect("/listings")
 }))
 
