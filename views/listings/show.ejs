@@ -36,6 +36,7 @@
                     </ul>
                 </div>
 
+              <% if(currentUser && listing.owner._id.equals(currentUser._id)) { %>
                 <div class="offset-4 show-btn">
                     <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary">Edit Here</a>
                     <br>
@@ -43,15 +44,16 @@
                         <button type="submit" class="btn btn-dark" id="show-btn">Delete This?</button>
                     </form>
                 </div>
-                
+                <% } %>
 
                 <hr>
             </div>
 
             <!-- Review Section -->
             <div class="col-8 offset-2 mb-3">
-                <h4>Leave a Review</h4>
-                <form method="POST" action="/listings/<%= listing.id %>/reviews" novalidate class="needs-validation">
+                <% if(currentUser){ %>
+                    <h4>Leave a Review</h4>
+                    <form method="POST" action="/listings/<%= listing.id %>/reviews" novalidate class="needs-validation">
                     <!-- Stars ki related -->
                     <div class="mb-3 mt-3">
                         <label class="form-label" for="rating">Rating</label>
@@ -82,9 +84,9 @@
                         <div class="invalid-feedback">Please write a valid Comments</div>
                     </div>
                     <button type="submit" class="btn btn-outline-dark">Submit</button>
-                </form>
-
-                <hr>
+                    </form>
+                    <hr>
+                <% } %>
                 <!-- Showing all the reviews -->
                 <div class="row">
                     <% if(listing.reviews.length > 0) { %>
@@ -95,18 +97,21 @@
                                 <div class="col-12 col-md-6 col-lg-6">
                                     <div class="card h-100 p-3">
                                         <div class="card-body">
-                                            <h5 class="card-title">User</h5>
+                                            <h5 class="card-title"><i><%= review.author.username %></i></h5>
                                             <p class="starability-result card-text"> <b> Rating : <%= review.rating %> Stars </b> </p>
                                             <p class="card-text">
                                                 <%= review.comment %>
                                             </p>
                                         </div>
                                         <!-- deletion of each review -->
+                                        <% if(currentUser && review.author && review.author._id.equals(currentUser._id)) { %>
+                                    <!-- what went wrong is nrml ga if nen login avvakunda just review delete click chesthe isLoggedIn trigger avi login page ki pothundhi after login manam redirect to original url ki chesthunam see userRoute but here is the thing redirect yemo get request pampisthundhi but manam rasindhi delete req so avvadhu ---- manam direct ga delete btn ee lepesam! Author ki matrame kanipisthundhii -->
                                         <form
                                             action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
                                             method="POST">
                                             <button type="submit" class="btn btn-sm btn-primary">Delete</button>
                                         </form>
+                                        <% } %>
                                     </div>
                                 </div>
                             <% } %>

@@ -6,7 +6,6 @@ const { listingSchemaJoi } = require("../schema") //server side validation
 const ExpressError = require("../utils/expressError") //error class ki
 const {isLoggedIn,validateListing,isOwner} = require("../middleware") //to find if user is logged in or not
  //owner aithene permission evvu
- //owner aithene permission evvu
 
 
 //home route
@@ -23,7 +22,13 @@ router.get("/new",isLoggedIn,(req, res) => {
 //show route
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params
-    const listing = await Listing.findById(id).populate("reviews").populate("owner") //both review and owner rendu frontend lo chupinchadaniki
+    const listing = await Listing.findById(id)
+    .populate({path:"reviews",
+            populate:{
+                path:"author" //review populate tho patu naku a author of that review kuda populate avvali
+            }
+    })
+    .populate("owner") //both review and owner rendu frontend lo chupinchadaniki
 
     if (!listing){ //lets say listing ni delete chesi malla adhe link ki osthe lisiting ledhu ani chepi all listing ki redirect chesthunam
         req.flash("error", "Listing Doesn't Exist!")

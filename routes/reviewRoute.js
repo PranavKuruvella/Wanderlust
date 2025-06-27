@@ -4,17 +4,18 @@ const Listing = require("../models/listing") //listing model
 const wrapAsync = require("../utils/wrapAsync") //error handling ki
 const ExpressError = require("../utils/expressError") //error class ki
 const Review = require("../models/review") //review schema
-const { validateReview } = require("../middleware")
+const { validateReview,isLoggedIn,isReviewAuthor } = require("../middleware")
 
 
 //review Post route
-router.post("/", validateReview, wrapAsync(async (req, res) => {
+router.post("/",isLoggedIn, validateReview, wrapAsync(async (req, res) => {
     let { id } = req.params
     let listing = await Listing.findById(id)
     if (!listing) {
         throw new ExpressError(404, "Listing not found")
     }
     let newReview = new Review(req.body.review)
+    newReview.author = req.user._id //author ni save chesthunam
     listing.reviews.push(newReview) //listing li reivews ane array lo push chesthunam!
     await newReview.save()
     await listing.save()
@@ -25,7 +26,7 @@ router.post("/", validateReview, wrapAsync(async (req, res) => {
 }))
 
 //delete each review for each listing
-router.delete("/:reviewId", wrapAsync(async (req, res) => {
+router.delete("/:reviewId",isLoggedIn,isReviewAuthor, wrapAsync(async (req, res) => {
     let { id, reviewId } = req.params
     await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } }) //this pulls aka deletes the reviewId inside the reviews Array of that particular listing
     await Review.findByIdAndDelete(reviewId) //this just deletes from review collection but not in listing array
