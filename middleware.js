@@ -25,6 +25,10 @@ const isOwner = async (req,res,next) =>{
 
         let { id } = req.params
         let listing = await Listing.findById(id)
+        if (!listing) {
+            req.flash("error", "Listing not found!")
+            return res.redirect("/listings")
+        }
         if(!listing.owner.equals(res.locals.currentUser._id)){
             req.flash("error","You aren't the owner so you cant edit or Delete")
             return res.redirect(`/listings/${id}`)
@@ -36,6 +40,10 @@ const isReviewAuthor = async (req,res,next) =>{
 
         let { id, reviewId } = req.params
         let review = await Review.findById(reviewId)
+        if (!review) {
+            req.flash("error", "Review not found!")
+            return res.redirect(`/listings/${id}`)
+        }
         if (!res.locals.currentUser) {
             req.flash("error", "Please Login to Continue");
             return res.redirect("/login");
