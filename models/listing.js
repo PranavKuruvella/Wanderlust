@@ -12,9 +12,6 @@ const listingSchema = new Schema({
         url: String,
         filename: String,
     },
-        // type: String,
-        // set: (v) => (!v || v === "") ? "https://images.unsplash.com/photo-1748367959778-12d026a20a99?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" : v,
-        // default: "https://images.unsplash.com/photo-1748367959778-12d026a20a99?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     price: Number,
     location: String,
     country: String,
@@ -27,7 +24,19 @@ const listingSchema = new Schema({
     owner:{
         type:Schema.Types.ObjectId, //Owner yokka id ni store chesthunam
         ref: "User"
-    }
+    },
+    geometry: {
+        type: {
+          type: String, // Don't do `{ location: { type: String } }`
+          enum: ['Point'], // 'location.type' must be 'Point'
+          required: true
+        },
+        coordinates: {
+          type: [Number],
+          required: true
+        }
+      }
+
 })
 
 //findbyIdAndDelete call avthe findOneAndDelete as a middleware pass avthundhi...we wrote a middleware to findOneAndDelete this thing....kabbati edhi kuda call avthundhi in a indirect way

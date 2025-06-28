@@ -119,3 +119,11 @@ body{
 .btn-outline-dark{
     color: white;
 }
+
+/* Map Styling */
+#map { 
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 1rem;
+}

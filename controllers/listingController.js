@@ -1,4 +1,7 @@
 const Listing = require("../models/listing")
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding'); 
+const mapToken = process.env.MAP_TOKEN
+const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({})
@@ -28,9 +31,15 @@ module.exports.showListing = async (req, res) => {
 }
 
 module.exports.createListing = async (req, res, next) => {
+  
+let response = await geocodingClient.forwardGeocode({ //name isthe coordinates isthundhi
+    query:req.body.listing.location,
+    limit: 1,
+  })
+    .send()
+  
   let newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
-
   //if req.file untene
   if (req.file) {
     let url = req.file.path;
@@ -38,7 +47,17 @@ module.exports.createListing = async (req, res, next) => {
     newListing.image = { url, filename };
   }
 
-  await newListing.save();
+  // Extract coordinates from the geocoding response
+  if (response.body.features && response.body.features.length > 0) {
+    const coordinates = response.body.features[0].geometry.coordinates;
+    newListing.geometry = {
+      type: "Point",
+      coordinates: coordinates
+    };
+  }
+
+  let savedlisting = await newListing.save();
+  console.log(savedlisting)
   req.flash("success", "New Listing Created!");
   res.redirect("/listings");
 }
