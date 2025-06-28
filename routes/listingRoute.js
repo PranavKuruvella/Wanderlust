@@ -2,34 +2,32 @@ const express = require("express")
 const router = express.Router()
 const wrapAsync = require("../utils/wrapAsync") //error handling ki
 const { listingSchemaJoi } = require("../schema") //server side validation
-const {isLoggedIn,validateListing,isOwner} = require("../middleware") //to find if user is logged in or not
- //owner aithene permission evvu
+const { isLoggedIn, validateListing, isOwner } = require("../middleware") //to find if user is logged in or not
+//owner aithene permission evvu
 
 const listingController = require("../controllers/listingController")
 
-//home route
-router.get("/", wrapAsync(listingController.index))
+
+router.route("/")
+    .get(wrapAsync(listingController.index)) //home route
+    .post(validateListing, wrapAsync(listingController.createListing)) //create route -- saving to Db
 
 //create route
-router.get("/new",isLoggedIn,listingController.renderNewForm)
+router.get("/new", isLoggedIn, listingController.renderNewForm)
 
-//show route
-router.get("/:id", wrapAsync(listingController.showListing))
-
-//create route -- saving to Db
-router.post("/", validateListing, wrapAsync(listingController.createListing))
+router.route("/:id")
+    //show route
+    .get(wrapAsync(listingController.showListing))
+    //update route
+    .put(
+        isLoggedIn,
+        isOwner, //owner aihtene delete chese permission isthunam
+        validateListing,
+        wrapAsync(listingController.updateListing))
+    //delete or destroy route
+    .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing))
 
 //edit route
-router.get("/:id/edit",isLoggedIn,isOwner, wrapAsync(listingController.renderEditForm))
-
-//update route
-router.put("/:id",
-    isLoggedIn,
-    isOwner, //owner aihtene delete chese permission isthunam
-    validateListing,
-    wrapAsync(listingController.updateListing))
-
-//delete route
-router.delete("/:id",isLoggedIn,isOwner, wrapAsync(listingController.destroyListing))
+router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm))
 
 module.exports = router

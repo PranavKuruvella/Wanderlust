@@ -6,24 +6,25 @@ const {saveRedirectUrl} = require("../middleware") //saves the original url wher
 
 const userController = require("../controllers/userController")
 
-//create route
-router.get("/signup", userController.renderSignUp)
 
-//saving to DB - from create route
-router.post("/signup", wrapAsync(userController.signup))
+router.route("/signup")
+    //create route
+    .get(userController.renderSignUp)
+    //saving to Db
+    .post(wrapAsync(userController.signup))
 
-//login route
-router.get("/login", userController.renderLogin)
-
-//checking inorder to login
-router.post("/login",saveRedirectUrl,
-    passport.authenticate("local", { //automatic ga username password teskoni adhe check chesthundhi with our DB
-        // local - basic kadha mandhi or google tho na alla..
-        // failureRedirect: "/login" -- fail aithe eekadaki po
-        // failureFlash: true -- fail aithe flash chupinchu automatic ga manam cretae cheyalisindhi akarledhu password ee chesthundhi flash messages
-        failureRedirect: "/login", failureFlash: true
-    }),
-    userController.login)
+router.route("/login")
+    //login route
+    .get(userController.renderLogin)
+    //checking inorder to login
+    .post(saveRedirectUrl,
+        passport.authenticate("local", { //automatic ga username password teskoni adhe check chesthundhi with our DB
+            // local - basic kadha mandhi or google tho na alla..
+            // failureRedirect: "/login" -- fail aithe eekadaki po
+            // failureFlash: true -- fail aithe flash chupinchu automatic ga manam cretae cheyalisindhi akarledhu password ee chesthundhi flash messages
+            failureRedirect: "/login", failureFlash: true
+        }),
+        userController.login)
 
 //logOut route
 router.get("/logout",userController.logOut)
