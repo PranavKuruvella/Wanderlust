@@ -28,12 +28,19 @@ module.exports.showListing = async (req, res) => {
 }
 
 module.exports.createListing = async (req, res, next) => {
+  let newListing = new Listing(req.body.listing);
+  newListing.owner = req.user._id;
 
-  let newListing = new Listing(req.body.listing)
-  newListing.owner = req.user._id //saving the respective owner in Db
-  await newListing.save()
-  req.flash("success", "New Listing Created!") //flash message
-  res.redirect("/listings")
+  //if req.file untene
+  if (req.file) {
+    let url = req.file.path;
+    let filename = req.file.filename;
+    newListing.image = { url, filename };
+  }
+
+  await newListing.save();
+  req.flash("success", "New Listing Created!");
+  res.redirect("/listings");
 }
 
 module.exports.renderEditForm = async (req, res) => {
@@ -43,12 +50,22 @@ module.exports.renderEditForm = async (req, res) => {
       req.flash("error", "Listing Doesn't Exist!")
       return res.redirect("/listings") //if no written both .redirect and .render is called anduke return rayali
   }
-  res.render("listings/edit", { listing })
+  originalImagUrl = listing.image.url
+  originalImagUrl = originalImagUrl.replace("/upload","/upload/w_250")
+  res.render("listings/edit", { listing,originalImagUrl })
 }
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params
-  await Listing.findByIdAndUpdate(id, { ...req.body.listing })
+  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing })
+
+    //if req.file lekapothe
+    if (req.file) {
+      let url = req.file.path;
+      let filename = req.file.filename;
+      listing.image = { url, filename };
+      await listing.save() //image upload cheyadam kosam add chesi malla save cesthunam
+    }
   req.flash("success", "Listing Updated!")
   res.redirect(`/listings/${id}`)
 }
