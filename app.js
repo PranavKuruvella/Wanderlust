@@ -10,6 +10,7 @@ const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate")
 const ExpressError = require("./utils/expressError") //error class ki
 const session = require("express-session")
+const MongoStore = require('connect-mongo')
 const flash = require("connect-flash")
 const passport = require("passport") //for auth and author
 const LocalStrategy = require("passport-local")
@@ -20,9 +21,10 @@ const listingRoute = require("./routes/listingRoute")
 const reviewRoute = require("./routes/reviewRoute")
 const userRoute = require("./routes/userRoute")
 
+const dbUrl = process.env.ATLASDB_URL
 
 async function main() {
-    await mongoose.connect("mongodb://localhost:27017/wanderlust")
+    await mongoose.connect(dbUrl)
 }
 main().then(() => {
     console.log("connected to DB")
@@ -38,8 +40,21 @@ app.engine('ejs', ejsMate)
 app.use(express.static(path.join(__dirname, "public")))
 
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto:{
+        secret: process.env.SECRET,
+    },
+    touchAfter: 24*3600,
+})
+
+store.on("error",()=>{
+    console.log("ERROR IN MONGO SESSION STORE",err)
+})
+
 const sessionOptions = {
-    secret: "secretcode",
+    store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie:{
@@ -48,6 +63,7 @@ const sessionOptions = {
         httpOnly:true
     }
 }
+
 
 //root route
 // app.get("/", (req, res) => {
