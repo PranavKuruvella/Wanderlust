@@ -1,8 +1,11 @@
 <% layout("/layouts/boilerplate") %>
-    <script>
-        const maptoken = "<%= process.env.MAP_TOKEN%>"
-        const coordinates = "<%- JSON.stringify(listing.geometry.coordinates)%>"
-    </script>
+
+<link rel="stylesheet" href="/css/show.css">
+
+<script>
+    const maptoken = "<%= process.env.MAP_TOKEN%>"
+    const coordinates = "<%- JSON.stringify(listing.geometry.coordinates)%>"
+</script>
     <!-- listing section -->
     <div class="row">
         <div class="col-8 offset-2">
@@ -39,11 +42,10 @@
             </div>
 
             <% if(currentUser && listing.owner._id.equals(currentUser._id)) { %>
-                <div class="offset-4 show-btn">
-                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary">Edit Here</a>
-                    <br>
-                    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-                        <button type="submit" class="btn btn-dark" id="show-btn">Delete This?</button>
+                <div class="show-btn">
+                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary same-size-btn">Edit Here</a>
+                    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-dark same-size-btn" id="show-btn">Delete This?</button>
                     </form>
                 </div>
                 <% } %>
@@ -111,12 +113,6 @@
                                             <!-- deletion of each review -->
                                             <% if(currentUser && review.author &&
                                                 review.author._id.equals(currentUser._id)) { %>
-                                                // !-- what went wrong is nrml ga if nen login avvakunda just review
-                                                delete click chesthe isLoggedIn trigger avi login page ki pothundhi
-                                                after login manam redirect to original url ki chesthunam see userRoute
-                                                but here is the thing redirect yemo get request pampisthundhi but manam
-                                                rasindhi delete req so avvadhu ---- manam direct ga delete btn ee
-                                                lepesam! Author ki matrame kanipisthundhii -->
                                                 <form
                                                     action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
                                                     method="POST">

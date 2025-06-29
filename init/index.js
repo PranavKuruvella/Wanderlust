@@ -19,4 +19,46 @@ const initDB = async ()=>{
      console.log("data added")
 
 }
-initDB()
+
+// Function to fix existing listings without geometry
+const fixExistingListings = async () => {
+    try {
+        // Find all listings without geometry
+        const listingsWithoutGeometry = await Listing.find({ 
+            $or: [
+                { geometry: { $exists: false } },
+                { geometry: null },
+                { "geometry.type": { $exists: false } }
+            ]
+        });
+        
+        console.log(`Found ${listingsWithoutGeometry.length} listings without geometry`);
+        
+        // Add default geometry for each listing without it
+        for (let listing of listingsWithoutGeometry) {
+            // Use a default location (you can customize this)
+            const defaultGeometry = {
+                type: "Point",
+                coordinates: [-74.0060, 40.7128] // Default to New York coordinates
+            };
+            
+            await Listing.findByIdAndUpdate(listing._id, {
+                geometry: defaultGeometry
+            });
+        }
+        
+        console.log("Fixed existing listings without geometry");
+    } catch (error) {
+        console.error("Error fixing existing listings:", error);
+    }
+};
+
+// Run both initialization and fix
+const runAll = async () => {
+    await initDB();
+    await fixExistingListings();
+    console.log("Database initialization and fix completed");
+    process.exit(0);
+};
+
+runAll();

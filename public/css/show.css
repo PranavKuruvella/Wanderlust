@@ -1,0 +1,455 @@
+/* Show page responsive styles */
+
+/* Desktop/Laptop styles - make edit and delete buttons same size as submit */
+@media (min-width: 769px) {
+    .show-btn .btn,
+    .show-btn a.btn,
+    .show-btn form .btn,
+    .btn-outline-dark,
+    .btn-sm.btn-primary {
+        min-width: auto;
+        max-width: none;
+        width: auto;
+        padding: 8px 20px;
+        font-size: 1rem;
+        font-weight: 700;
+        border-radius: 4px;
+        box-shadow: none;
+        transition: all 0.3s ease;
+    }
+    
+    .show-btn .btn:hover,
+    .show-btn a.btn:hover,
+    .show-btn form .btn:hover {
+        transform: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+    .row {
+        margin: 0;
+    }
+    
+    .col-8.offset-2 {
+        width: 100%;
+        margin: 0;
+        padding: 0 15px;
+    }
+    
+    #show-card {
+        width: 100%;
+        margin: 0 auto 1.5rem auto;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+    
+    #show-img {
+        border-radius: 12px;
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: cover;
+    }
+    
+    .card-body {
+        padding: 1rem 0;
+        text-align: left;
+    }
+    
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+    
+    .card-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        color: #666;
+    }
+    
+    /* Listing details */
+    .offset-2.col-md-8 {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+    }
+    
+    li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #eee;
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+    
+    li:last-child {
+        border-bottom: none;
+    }
+    
+    /* Buttons */
+    .show-btn {
+        width: auto;
+        margin: 0;
+        text-align: center;
+        padding: 0.5rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.03rem;
+    }
+    
+    .show-btn .btn,
+    .show-btn a.btn {
+        width: 120px;
+        min-width: 120px;
+        margin: 0;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+        border-radius: 4px;
+        display: inline-block;
+        flex-shrink: 0;
+        text-align: center;
+    }
+    
+    .show-btn a.btn {
+        text-decoration: none;
+    }
+    
+    .show-btn form {
+        display: inline-block;
+        margin: 0;
+    }
+    
+    .show-btn form .btn {
+        width: 120px;
+        min-width: 120px;
+    }
+    
+    .btn-outline-dark {
+        width: 120px;
+        min-width: 120px;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .btn-sm.btn-primary {
+        width: 120px;
+        min-width: 120px;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.7rem;
+    }
+    
+    /* Review section */
+    .col-8.offset-2.mb-3 {
+        width: 100%;
+        margin: 0 0 1rem 0;
+        padding: 0 15px;
+    }
+    
+    h4 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-control {
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+    
+    textarea.form-control {
+        min-height: 100px;
+    }
+    
+    /* Review cards */
+    .col-12.col-md-6.col-lg-6 {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .card.h-100.p-3 {
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #eee;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .card-text {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        color: #333;
+    }
+    
+    /* Review section delete buttons - different from show page buttons */
+    .card.h-100.p-3 .btn-sm.btn-primary {
+        width: auto;
+        min-width: 80px;
+        margin-top: 0.5rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+    }
+    
+    /* Listing cards - center content on mobile */
+    .listing-card {
+        text-align: center;
+    }
+    
+    .listing-card .card-img-top {
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+    }
+    
+    .listing-card .card-body {
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .listing-card .card-title {
+        text-align: center;
+        margin-bottom: 0.75rem;
+    }
+    
+    .listing-card .card-text {
+        text-align: center;
+        margin-bottom: 0.75rem;
+    }
+    
+    .listing-card .price {
+        text-align: center;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-title {
+        font-size: 1.3rem;
+    }
+    
+    .card-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    li {
+        font-size: 0.9rem;
+        padding: 0.6rem 0;
+    }
+    
+    h4 {
+        font-size: 1.2rem;
+    }
+    
+    .form-control {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    .btn-outline-dark {
+        width: 100px;
+        min-width: 100px;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.7rem;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+    
+    .card-text {
+        font-size: 0.85rem;
+    }
+    
+    .show-btn .btn,
+    .show-btn a.btn,
+    .show-btn form .btn {
+        width: 100px;
+        min-width: 100px;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.7rem;
+    }
+    
+    .btn-sm.btn-primary {
+        width: 100px;
+        min-width: 100px;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.65rem;
+    }
+    
+    .listing-card {
+        text-align: center;
+    }
+    
+    .listing-card .card-img-top {
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+    }
+    
+    .listing-card .card-body {
+        text-align: center;
+        padding: 0.75rem;
+    }
+    
+    .listing-card .card-title {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .listing-card .card-text {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .listing-card .price {
+        text-align: center;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .col-8.offset-2 {
+        padding: 0 10px;
+    }
+    
+    .col-8.offset-2.mb-3 {
+        padding: 0 10px;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+    }
+    
+    .card-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    li {
+        font-size: 0.85rem;
+        padding: 0.5rem 0;
+    }
+    
+    h4 {
+        font-size: 1.1rem;
+    }
+    
+    .form-control {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .btn-outline-dark {
+        width: 90px;
+        min-width: 90px;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.65rem;
+    }
+    
+    .card-title {
+        font-size: 0.95rem;
+    }
+    
+    .card-text {
+        font-size: 0.8rem;
+    }
+    
+    .show-btn .btn,
+    .show-btn a.btn,
+    .show-btn form .btn {
+        width: 90px;
+        min-width: 90px;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.65rem;
+    }
+    
+    .btn-sm.btn-primary {
+        width: 90px;
+        min-width: 90px;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.6rem;
+    }
+    
+    .listing-card {
+        text-align: center;
+    }
+    
+    .listing-card .card-img-top {
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+    }
+    
+    .listing-card .card-body {
+        text-align: center;
+        padding: 0.5rem;
+    }
+    
+    .listing-card .card-title {
+        text-align: center;
+        margin-bottom: 0.4rem;
+    }
+    
+    .listing-card .card-text {
+        text-align: center;
+        margin-bottom: 0.4rem;
+    }
+    
+    .listing-card .price {
+        text-align: center;
+        margin-bottom: 0;
+    }
+}
+
+/* Button consistency */
+.show-btn {
+    display: flex;
+    padding-top: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.same-size-btn {
+    min-width: 120px;
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.same-size-btn:hover {
+    transform: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.show-btn a.btn,
+.show-btn form button {
+    text-decoration: none;
+    display: inline-block;
+} 

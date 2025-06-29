@@ -10,6 +10,10 @@ const testListings = [
     price: 1500,
     location: "Malibu",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-118.6919, 34.0259]
+    }
   },
   {
     title: "Modern Loft in Downtown",
@@ -22,6 +26,10 @@ const testListings = [
     price: 1200,
     location: "New York City",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-74.0060, 40.7128]
+    }
   },
   {
     title: "Mountain Retreat",
@@ -34,6 +42,10 @@ const testListings = [
     price: 1000,
     location: "Aspen",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-106.8234, 39.1911]
+    }
   },
   {
     title: "Historic Villa in Tuscany",
@@ -46,6 +58,10 @@ const testListings = [
     price: 2500,
     location: "Florence",
     country: "Italy",
+    geometry: {
+      type: "Point",
+      coordinates: [11.2558, 43.7696]
+    }
   },
   {
     title: "Secluded Treehouse Getaway",
@@ -58,6 +74,10 @@ const testListings = [
     price: 800,
     location: "Portland",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-122.6765, 45.5152]
+    }
   },
   {
     title: "Beachfront Paradise",
@@ -70,6 +90,10 @@ const testListings = [
     price: 2000,
     location: "Cancun",
     country: "Mexico",
+    geometry: {
+      type: "Point",
+      coordinates: [-86.8515, 21.1743]
+    }
   },
   {
     title: "Rustic Cabin by the Lake",
@@ -82,6 +106,10 @@ const testListings = [
     price: 900,
     location: "Lake Tahoe",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-119.9962, 39.1911]
+    }
   },
   {
     title: "Luxury Penthouse with City Views",
@@ -94,6 +122,10 @@ const testListings = [
     price: 3500,
     location: "Los Angeles",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-118.2437, 34.0522]
+    }
   },
   {
     title: "Ski-In/Ski-Out Chalet",
@@ -106,6 +138,10 @@ const testListings = [
     price: 3000,
     location: "Verbier",
     country: "Switzerland",
+    geometry: {
+      type: "Point",
+      coordinates: [6.8649, 46.0555]
+    }
   },
   {
     title: "Safari Lodge in the Serengeti",
@@ -118,6 +154,10 @@ const testListings = [
     price: 4000,
     location: "Serengeti National Park",
     country: "Tanzania",
+    geometry: {
+      type: "Point",
+      coordinates: [35.0052, -2.3526]
+    }
   },
   {
     title: "Historic Canal House",
@@ -130,6 +170,10 @@ const testListings = [
     price: 1800,
     location: "Amsterdam",
     country: "Netherlands",
+    geometry: {
+      type: "Point",
+      coordinates: [5.1517, 52.3702]
+    }
   },
   {
     title: "Private Island Retreat",
@@ -142,6 +186,10 @@ const testListings = [
     price: 10000,
     location: "Fiji",
     country: "Fiji",
+    geometry: {
+      type: "Point",
+      coordinates: [179.4163, -18.1426]
+    }
   },
   {
     title: "Charming Cottage in the Cotswolds",
@@ -154,6 +202,10 @@ const testListings = [
     price: 1200,
     location: "Cotswolds",
     country: "United Kingdom",
+    geometry: {
+      type: "Point",
+      coordinates: [-1.7764, 51.5644]
+    }
   },
   {
     title: "Historic Brownstone in Boston",
@@ -166,6 +218,10 @@ const testListings = [
     price: 2200,
     location: "Boston",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-71.0589, 42.3601]
+    }
   },
   {
     title: "Beachfront Bungalow in Bali",
@@ -178,6 +234,10 @@ const testListings = [
     price: 1800,
     location: "Bali",
     country: "Indonesia",
+    geometry: {
+      type: "Point",
+      coordinates: [115.0920, -8.4095]
+    }
   },
   {
     title: "Mountain View Cabin in Banff",
@@ -190,6 +250,10 @@ const testListings = [
     price: 1500,
     location: "Banff",
     country: "Canada",
+    geometry: {
+      type: "Point",
+      coordinates: [-115.5705, 51.1759]
+    }
   },
   {
     title: "Art Deco Apartment in Miami",
@@ -202,6 +266,10 @@ const testListings = [
     price: 1600,
     location: "Miami",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-80.1918, 25.7617]
+    }
   },
   {
     title: "Tropical Villa in Phuket",
@@ -214,6 +282,10 @@ const testListings = [
     price: 3000,
     location: "Phuket",
     country: "Thailand",
+    geometry: {
+      type: "Point",
+      coordinates: [98.8008, 7.8881]
+    }
   },
   {
     title: "Historic Castle in Scotland",
@@ -226,6 +298,10 @@ const testListings = [
     price: 4000,
     location: "Scottish Highlands",
     country: "United Kingdom",
+    geometry: {
+      type: "Point",
+      coordinates: [-4.3703, 57.6172]
+    }
   },
   {
     title: "Desert Oasis in Dubai",
@@ -238,6 +314,10 @@ const testListings = [
     price: 5000,
     location: "Dubai",
     country: "United Arab Emirates",
+    geometry: {
+      type: "Point",
+      coordinates: [55.2962, 25.2769]
+    }
   },
   {
     title: "Rustic Log Cabin in Montana",
@@ -250,6 +330,10 @@ const testListings = [
     price: 1100,
     location: "Montana",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-110.8340, 45.7860]
+    }
   },
   {
     title: "Beachfront Villa in Greece",
@@ -262,6 +346,10 @@ const testListings = [
     price: 2500,
     location: "Mykonos",
     country: "Greece",
+    geometry: {
+      type: "Point",
+      coordinates: [25.3219, 37.4478]
+    }
   },
   {
     title: "Eco-Friendly Treehouse Retreat",
@@ -274,6 +362,10 @@ const testListings = [
     price: 750,
     location: "Costa Rica",
     country: "Costa Rica",
+    geometry: {
+      type: "Point",
+      coordinates: [-84.1193, 9.7489]
+    }
   },
   {
     title: "Historic Cottage in Charleston",
@@ -286,6 +378,10 @@ const testListings = [
     price: 1600,
     location: "Charleston",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-79.9311, 32.7765]
+    }
   },
   {
     title: "Modern Apartment in Tokyo",
@@ -298,6 +394,10 @@ const testListings = [
     price: 2000,
     location: "Tokyo",
     country: "Japan",
+    geometry: {
+      type: "Point",
+      coordinates: [139.6917, 35.6895]
+    }
   },
   {
     title: "Lakefront Cabin in New Hampshire",
@@ -310,6 +410,10 @@ const testListings = [
     price: 1200,
     location: "New Hampshire",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-71.4352, 44.2706]
+    }
   },
   {
     title: "Luxury Villa in the Maldives",
@@ -322,6 +426,10 @@ const testListings = [
     price: 6000,
     location: "Maldives",
     country: "Maldives",
+    geometry: {
+      type: "Point",
+      coordinates: [73.5089, 3.2028]
+    }
   },
   {
     title: "Ski Chalet in Aspen",
@@ -334,6 +442,10 @@ const testListings = [
     price: 4000,
     location: "Aspen",
     country: "United States",
+    geometry: {
+      type: "Point",
+      coordinates: [-106.8175, 39.1911]
+    }
   },
   {
     title: "Secluded Beach House in Costa Rica",
@@ -346,6 +458,10 @@ const testListings = [
     price: 1800,
     location: "Costa Rica",
     country: "Costa Rica",
+    geometry: {
+      type: "Point",
+      coordinates: [-85.9411, 9.7413]
+    }
   },
 ];
 

@@ -1,28 +1,112 @@
 <% layout("/layouts/boilerplate") %>
-    <body>
-        <h1>All listings</h1>
 
+<link rel="stylesheet" href="/css/filters.css">
 
-        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-            <% for(let listing of allListings){ %>
-                <a href="/listings/<%= listing._id %>">
-                    <div class="card listing-card index-card " style="width: 20rem;">
-                        <img src="<%=listing.image.url%>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h6 class="card-title">
-                                <%=listing.title%>
-                            </h6>
-                            <p class="card-text">
-                                <%=listing.description%>
-                            </p>
-                            <p class="card-text price"> <b> &#8377; <%= listing.price.toLocaleString("en-IN") %></b> /
-                                night
-                            </p>
-                        </div>
-                    </div>
+<!-- <h1>All listings</h1> -->
 
-                </a>
-                <% } %>
+<!-- filter section -->
+<div class="filter-container d-none d-md-flex">
+    <div id="filters">
+        <div class="filter">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
         </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Room</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-city"></i></div>
+            <p>Iconic Cities</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>Mountains</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Castles</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Swmming Pools</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-tractor"></i></div>
+            <p>Farms</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-regular fa-snowflake"></i></div>
+            <p>Arctic</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-ship"></i></div>
+            <p>Cruise Ship</p>
+        </div>
+    </div>
 
-    </body>
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Disply total after Taxes</label>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <% for(let listing of allListings){ %>
+        <a href="/listings/<%= listing._id %>">
+            <div class="card listing-card index-card">
+                <img src="<%=listing.image.url%>" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <%=listing.title%>
+                    </h6>
+                    <p class="card-text">
+                        <%=listing.description%>
+                    </p>
+                    <p class="card-text price"> <b> &#8377; <%= listing.price.toLocaleString("en-IN") %></b> /
+                        night
+                        <i class="tax-info">&nbsp; +18% GST</i>
+                    </p>
+                </div>
+            </div>
+
+        </a>
+        <% } %>
+</div>
+
+<script>
+    // Desktop tax toggle
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault")
+    // Mobile tax toggle
+    let mobileTaxSwitch = document.getElementById("mobileTaxSwitch")
+    
+    // Function to toggle tax info
+    function toggleTaxInfo(show) {
+        let taxInfo = document.getElementsByClassName("tax-info")
+        for(info of taxInfo){
+            info.style.display = show ? "inline" : "none"
+        }
+    }
+    
+    // Desktop toggle event
+    taxSwitch.addEventListener("click", () => {
+        let isChecked = taxSwitch.checked
+        mobileTaxSwitch.checked = isChecked // Sync mobile toggle
+        toggleTaxInfo(isChecked)
+    })
+    
+    // Mobile toggle event
+    if(mobileTaxSwitch) {
+        mobileTaxSwitch.addEventListener("click", () => {
+            let isChecked = mobileTaxSwitch.checked
+            taxSwitch.checked = isChecked // Sync desktop toggle
+            toggleTaxInfo(isChecked)
+        })
+    }
+</script> 

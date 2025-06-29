@@ -50,9 +50,9 @@ const sessionOptions = {
 }
 
 //root route
-app.get("/", (req, res) => {
-    res.send("HI I AM ROOT")
-})
+// app.get("/", (req, res) => {
+//     res.send("HI I AM ROOT")
+// })
 
 app.use(session(sessionOptions)) //using sessions
 app.use(flash())
@@ -77,8 +77,9 @@ app.use((req,res,next)=>{
 app.use("/listings",listingRoute)
 app.use("/listings/:id/reviews",reviewRoute)
 app.use("/",userRoute)
-//any other route
-// app.all("(.*)", (req, res, next) => {
+
+// 404 handler for any other route
+// app.use("*", (req, res, next) => {
 //     const err = new ExpressError(404,"Page not found");
 //     next(err);
 // });

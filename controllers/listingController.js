@@ -76,15 +76,42 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params
-  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing })
+  
+  // Get the existing listing to preserve geometry if geocoding fails
+  let existingListing = await Listing.findById(id)
+  
+  // Get geocoding data for the updated location
+  let response = await geocodingClient.forwardGeocode({
+    query: req.body.listing.location,
+    limit: 1,
+  }).send()
 
-    //if req.file lekapothe
-    if (req.file) {
-      let url = req.file.path;
-      let filename = req.file.filename;
-      listing.image = { url, filename };
-      await listing.save() //image upload cheyadam kosam add chesi malla save cesthunam
+  // Prepare the update data
+  let updateData = { ...req.body.listing }
+
+  // Extract coordinates from the geocoding response
+  if (response.body.features && response.body.features.length > 0) {
+    const coordinates = response.body.features[0].geometry.coordinates;
+    updateData.geometry = {
+      type: "Point",
+      coordinates: coordinates
+    };
+  } else {
+    // If geocoding fails, preserve the existing geometry
+    if (existingListing.geometry) {
+      updateData.geometry = existingListing.geometry;
     }
+  }
+
+  let listing = await Listing.findByIdAndUpdate(id, updateData)
+
+  //if req.file lekapothe
+  if (req.file) {
+    let url = req.file.path;
+    let filename = req.file.filename;
+    listing.image = { url, filename };
+    await listing.save() //image upload cheyadam kosam add chesi malla save cesthunam
+  }
   req.flash("success", "Listing Updated!")
   res.redirect(`/listings/${id}`)
 }

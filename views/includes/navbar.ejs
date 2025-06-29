@@ -1,26 +1,107 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
+<link rel="stylesheet" href="/css/navbar.css">
+
+<nav class="navbar navbar-expand-md bg-light border-bottom sticky-top">
+  <div class="container-fluid position-relative d-flex flex-wrap align-items-center">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Search Bar - Centered -->
+    <div class="search-bar">
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="Search destinations, dates, guests..." 
+        aria-label="Search destinations, dates, and guests"
+        id="searchInput"
+      />
+      <button 
+        type="button" 
+        class="search-button" 
+        aria-label="Search"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link " aria-current="page" href="/">Home</a>
-        <a class="nav-link" href="/listings">All Listings</a>
-        <a class="nav-link" href="/listings/new"> Add New Listing</a>
-      </div>
-      <div class="navbar-nav ms-auto ">
-        <% if (!currentUser) { %>
-          <a class="nav-link " aria-current="page" href="/signup">SignUp</a>
-          <a class="nav-link" href="/login">Log in</a>
-          <% } %>
-            <% if (currentUser) { %>
-              <a class="nav-link" href="/logout">Log out</a>
-            <% } %>
+        <a class="nav-link" href="/listings">Explore</a>
       </div>
 
+      <!-- ADDED: Filters section for mobile devices -->
+      <div class="navbar-nav d-md-none">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-filter"></i> Filters
+          </a>
+          <div class="dropdown-menu p-3" style="width: 280px;">
+            <h6 class="dropdown-header">Filter by Category</h6>
+            <div class="mobile-filters">
+              <div class="mobile-filter-item">
+                <i class="fa-solid fa-fire"></i>
+                <span>Trending</span>
+              </div>
+              <div class="mobile-filter-item">
+                <i class="fa-solid fa-bed"></i>
+                <span>Room</span>
+              </div>
+              <div class="mobile-filter-item">
+                <i class="fa-solid fa-city"></i>
+                <span>Iconic Cities</span>
+              </div>
+              <div class="mobile-filter-item">
+                <i class="fa-solid fa-mountain-city"></i>
+                <span>Mountains</span>
+              </div>
+              <div class="mobile-filter-item">
+                <i class="fa-brands fa-fort-awesome"></i>
+                <span>Castles</span>
+              </div>
+              <div class="mobile-filter-item">
+                <i class="fa-solid fa-person-swimming"></i>
+                <span>Swimming Pools</span>
+              </div>
+              <div class="mobile-filter-item">
+                <i class="fa-solid fa-campground"></i>
+                <span>Camping</span>
+              </div>
+              <div class="mobile-filter-item">
+                <i class="fa-solid fa-tractor"></i>
+                <span>Farms</span>
+              </div>
+              <div class="mobile-filter-item">
+                <i class="fa-regular fa-snowflake"></i>
+                <span>Arctic</span>
+              </div>
+              <div class="mobile-filter-item">
+                <i class="fa-solid fa-ship"></i>
+                <span>Cruise Ship</span>
+              </div>
+            </div>
+            <hr>
+            <div class="mobile-tax-toggle">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="mobileTaxSwitch">
+                <label class="form-check-label" for="mobileTaxSwitch">Display total after Taxes</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <% if (!currentUser) { %>
+          <a class="nav-link" aria-current="page" href="/signup"><b>SignUp</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } %>
+        <% if (currentUser) { %>
+          <a class="nav-link" href="/logout"><b>Log out</b></a>
+        <% } %>
+      </div>
     </div>
   </div>
 </nav>
