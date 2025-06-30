@@ -109,6 +109,11 @@ body{
     text-decoration: none;
 }
 
+.price {
+    color: #333 !important;
+    font-weight: 500;
+}
+
 .btn{
     background-color: #fe424d;
     border: none;
